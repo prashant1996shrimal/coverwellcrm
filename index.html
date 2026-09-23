@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MyBusiness CRM</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="logo">
+                 <img src="logo.png" alt="Coverwell Group Logo" height="25" width="25">
+                <span>Coverwell</span>
+            </div>
+
+            <div class="menu-title">MAIN</div>
+
+            <nav class="menu">
+
+                <a href="#" class="menu-item active">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="#" class="menu-item">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <span>Calls</span>
+                    <span class="badge">12</span>
+                </a>
+
+                <a href="#" class="menu-item">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Customers</span>
+                </a>
+
+                <a href="#" class="menu-item">
+                    <i class="fa-solid fa-bullseye"></i>
+                    <span>Leads</span>
+                    <span class="badge">8</span>
+                </a>
+
+                <a href="#" class="menu-item">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>Tasks</span>
+                </a>
+
+                <div class="menu-title">BUSINESS</div>
+
+                <a href="#" class="menu-item">
+                    <i class="fa-solid fa-user-group"></i>
+                    <span>Employees</span>
+                </a>
+
+                <a href="#" class="menu-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Reports</span>
+                </a>
+
+
+
+                <a href="#" class="menu-item">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </a>
+                
+                
+
+                <div class="menu-title">SYSTEM</div>
+
+                <a href="#" class="menu-item">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+
+                <a href="#" class="menu-item" id="logoutButton">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+
+
+
+            </nav>
+
+            <!-- User -->
+            <div class="sidebar-user">
+
+                <div class="user-avatar">
+                    PS
+                </div>
+
+                <div class="user-info">
+                    <strong>Prashant</strong>
+                    <span>Administrator</span>
+                </div>
+
+                <i class="fa-solid fa-ellipsis"></i>
+
+
+            </div>
+
+        </aside>
+
+
+        <!-- ================= MAIN ================= -->
+        <main class="main">
+
+            <!-- TOPBAR -->
+            <header class="topbar">
+
+                <div class="top-left">
+
+                    <button class="mobile-menu" id="menuButton">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+
+                    <div class="search">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input type="text" id="searchInput" placeholder="Search customers, leads...">
+
+                        <span class="shortcut">Ctrl K</span>
+
+                    </div>
+
+                </div>
+
+                <div class="top-right">
+
+                    <button class="icon-button">
+                        <i class="fa-regular fa-circle-question"></i>
+                    </button>
+
+                    <button class="icon-button notification">
+                        <i class="fa-regular fa-bell"></i>
+                        <span></span>
+                    </button>
+
+                    <div class="profile">
+
+                        <div class="profile-avatar">
+                            PS
+                        </div>
+
+                        <div class="profile-info">
+                            <strong>Prashant</strong>
+                            <small>Admin</small>
+                        </div>
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- CONTENT -->
+            <section class="content">
+
+                <!-- PAGE HEADER -->
+                <div class="page-header">
+
+                    <div>
+                        <h1>Good morning, Prashant 👋</h1>
+
+                        <p>
+                            Here's what's happening with your business today.
+                        </p>
+                    </div>
+
+                    <button class="primary-button" id="addCustomerButton">
+                        <i class="fa-solid fa-plus"></i>
+                        Add Customer
+                    </button>
+
+                </div>
+
+
+                <!-- ================= STAT CARDS ================= -->
+                <div class="stats">
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+                            <div class="stat-icon blue">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+
+                            <span class="increase">
+                                +12.5%
+                                <i class="fa-solid fa-arrow-up"></i>
+                            </span>
+                        </div>
+
+                        <p>Total Calls</p>
+
+                        <h2>1,284</h2>
+
+                        <small>Compared to last month</small>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+                            <div class="stat-icon purple">
+                                <i class="fa-solid fa-bullseye"></i>
+                            </div>
+
+                            <span class="increase">
+                                +8.2%
+                                <i class="fa-solid fa-arrow-up"></i>
+                            </span>
+                        </div>
+
+                        <p>New Leads</p>
+
+                        <h2>426</h2>
+
+                        <small>Compared to last month</small>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+                            <div class="stat-icon green">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
+
+                            <span class="increase">
+                                +15.4%
+                                <i class="fa-solid fa-arrow-up"></i>
+                            </span>
+                        </div>
+
+                        <p>Customers</p>
+
+                        <h2>2,846</h2>
+
+                        <small>Compared to last month</small>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+                            <div class="stat-icon orange">
+                                <i class="fa-solid fa-indian-rupee-sign"></i>
+                            </div>
+
+                            <span class="increase">
+                                +10.8%
+                                <i class="fa-solid fa-arrow-up"></i>
+                            </span>
+                        </div>
+
+                        <p>Revenue</p>
+
+                        <h2>₹8.45L</h2>
+
+                        <small>Compared to last month</small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= ANALYTICS ================= -->
+                <div class="dashboard-grid">
+
+                    <!-- CALL ANALYTICS -->
+                    <div class="card analytics-card">
+
+                        <div class="card-header">
+
+                            <div>
+                                <h3>Call Analytics</h3>
+                                <p>Overview of your calls</p>
+                            </div>
+
+                            <select id="periodSelect">
+                                <option>Last 7 Days</option>
+                                <option>Last 30 Days</option>
+                                <option>Last 3 Months</option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="chart">
+
+                            <div class="y-axis">
+                                <span>300</span>
+                                <span>200</span>
+                                <span>100</span>
+                                <span>0</span>
+                            </div>
+
+                            <div class="chart-area">
+
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+
+                                <svg class="line-chart" viewBox="0 0 700 250" preserveAspectRatio="none">
+
+                                    <polyline points="0,180 100,130 200,150 300,80 400,110 500,60 600,90 700,35" />
+
+                                    <polyline class="secondary-line"
+                                        points="0,210 100,190 200,195 300,160 400,175 500,135 600,145 700,120" />
+
+                                </svg>
+
+                                <div class="x-axis">
+                                    <span>Mon</span>
+                                    <span>Tue</span>
+                                    <span>Wed</span>
+                                    <span>Thu</span>
+                                    <span>Fri</span>
+                                    <span>Sat</span>
+                                    <span>Sun</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="chart-legend">
+
+                            <div>
+                                <span class="legend-dot blue-dot"></span>
+                                Incoming Calls
+                            </div>
+
+                            <div>
+                                <span class="legend-dot purple-dot"></span>
+                                Outgoing Calls
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- RECENT ACTIVITY -->
+                    <div class="card activity-card">
+
+                        <div class="card-header">
+
+                            <div>
+                                <h3>Recent Activity</h3>
+                                <p>Latest business activity</p>
+                            </div>
+
+                            <a href="#">View all</a>
+
+                        </div>
+
+
+                        <div class="activity-list">
+
+                            <div class="activity">
+
+                                <div class="activity-icon call">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+
+                                <div class="activity-text">
+                                    <strong>Incoming call</strong>
+                                    <span>Rahul Sharma called you</span>
+                                </div>
+
+                                <time>2m</time>
+
+                            </div>
+
+
+                            <div class="activity">
+
+                                <div class="activity-icon customer">
+                                    <i class="fa-solid fa-user-plus"></i>
+                                </div>
+
+                                <div class="activity-text">
+                                    <strong>New customer</strong>
+                                    <span>Neha Singh was added</span>
+                                </div>
+
+                                <time>15m</time>
+
+                            </div>
+
+
+                            <div class="activity">
+
+                                <div class="activity-icon lead">
+                                    <i class="fa-solid fa-bullseye"></i>
+                                </div>
+
+                                <div class="activity-text">
+                                    <strong>Lead converted</strong>
+                                    <span>Amit Kumar became customer</span>
+                                </div>
+
+                                <time>32m</time>
+
+                            </div>
+
+
+                            <div class="activity">
+
+                                <div class="activity-icon task">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+
+                                <div class="activity-text">
+                                    <strong>Task completed</strong>
+                                    <span>Follow-up with Raj completed</span>
+                                </div>
+
+                                <time>1h</time>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= BOTTOM GRID ================= -->
+                <div class="bottom-grid">
+
+
+                    <!-- RECENT CALLS -->
+                    <div class="card calls-card">
+
+                        <div class="card-header">
+
+                            <div>
+                                <h3>Recent Calls</h3>
+                                <p>Your latest calls</p>
+                            </div>
+
+                            <a href="#">View all</a>
+
+                        </div>
+
+
+                        <div class="table-container">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+                                        <th>Customer</th>
+                                        <th>Type</th>
+                                        <th>Duration</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+
+                                        <td>
+                                            <div class="customer">
+                                                <div class="customer-avatar">RS</div>
+
+                                                <div>
+                                                    <strong>Rahul Sharma</strong>
+                                                    <small>+91 98765 43210</small>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <span class="call-type incoming">
+                                                <i class="fa-solid fa-arrow-down"></i>
+                                                Incoming
+                                            </span>
+                                        </td>
+
+                                        <td>04:32</td>
+
+                                        <td>
+                                            <span class="status completed">
+                                                Answered
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <button class="more-button">
+                                                <i class="fa-solid fa-ellipsis"></i>
+                                            </button>
+                                        </td>
+
+                                    </tr>
+
+
+                                    <tr>
+
+                                        <td>
+                                            <div class="customer">
+                                                <div class="customer-avatar">AK</div>
+
+                                                <div>
+                                                    <strong>Amit Kumar</strong>
+                                                    <small>+91 91234 56789</small>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <span class="call-type outgoing">
+                                                <i class="fa-solid fa-arrow-up"></i>
+                                                Outgoing
+                                            </span>
+                                        </td>
+
+                                        <td>02:18</td>
+
+                                        <td>
+                                            <span class="status completed">
+                                                Completed
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <button class="more-button">
+                                                <i class="fa-solid fa-ellipsis"></i>
+                                            </button>
+                                        </td>
+
+                                    </tr>
+
+
+                                    <tr>
+
+                                        <td>
+                                            <div class="customer">
+                                                <div class="customer-avatar">NS</div>
+
+                                                <div>
+                                                    <strong>Neha Singh</strong>
+                                                    <small>+91 99887 66554</small>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <span class="call-type incoming">
+                                                <i class="fa-solid fa-arrow-down"></i>
+                                                Incoming
+                                            </span>
+                                        </td>
+
+                                        <td>00:00</td>
+
+                                        <td>
+                                            <span class="status missed">
+                                                Missed
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <button class="more-button">
+                                                <i class="fa-solid fa-ellipsis"></i>
+                                            </button>
+                                        </td>
+
+                                    </tr>
+
+
+                                    <tr>
+
+                                        <td>
+                                            <div class="customer">
+                                                <div class="customer-avatar">RM</div>
+
+                                                <div>
+                                                    <strong>Raj Mehta</strong>
+                                                    <small>+91 90123 45678</small>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <span class="call-type outgoing">
+                                                <i class="fa-solid fa-arrow-up"></i>
+                                                Outgoing
+                                            </span>
+                                        </td>
+
+                                        <td>06:45</td>
+
+                                        <td>
+                                            <span class="status completed">
+                                                Completed
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <button class="more-button">
+                                                <i class="fa-solid fa-ellipsis"></i>
+                                            </button>
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FOLLOW UPS -->
+                    <div class="card tasks-card">
+
+                        <div class="card-header">
+
+                            <div>
+                                <h3>Today's Follow-ups</h3>
+                                <p>Tasks that need your attention</p>
+                            </div>
+
+                            <button class="add-task" id="addTaskButton">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+
+                        </div>
+
+
+                        <div class="task-list">
+
+                            <div class="task">
+
+                                <input type="checkbox">
+
+                                <div>
+                                    <strong>Call Rahul Sharma</strong>
+                                    <span>10:30 AM • High priority</span>
+                                </div>
+
+                                <span class="priority high">
+                                    High
+                                </span>
+
+                            </div>
+
+
+                            <div class="task">
+
+                                <input type="checkbox">
+
+                                <div>
+                                    <strong>Send quotation to Amit</strong>
+                                    <span>12:00 PM • Medium priority</span>
+                                </div>
+
+                                <span class="priority medium">
+                                    Medium
+                                </span>
+
+                            </div>
+
+
+                            <div class="task">
+
+                                <input type="checkbox">
+
+                                <div>
+                                    <strong>Follow up with Neha</strong>
+                                    <span>2:30 PM • Low priority</span>
+                                </div>
+
+                                <span class="priority low">
+                                    Low
+                                </span>
+
+                            </div>
+
+
+                            <div class="task">
+
+                                <input type="checkbox">
+
+                                <div>
+                                    <strong>Call Raj Mehta</strong>
+                                    <span>4:00 PM • High priority</span>
+                                </div>
+
+                                <span class="priority high">
+                                    High
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- ================= ADD CUSTOMER MODAL ================= -->
+
+    <div class="modal-overlay" id="customerModal">
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div>
+                    <h2>Add Customer</h2>
+                    <p>Add a new customer to your CRM</p>
+                </div>
+
+                <button class="close-modal" id="closeModal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+
+            <form id="customerForm">
+
+                <div class="form-group">
+
+                    <label>Customer Name</label>
+
+                    <input type="text" id="customerName" placeholder="Enter customer name" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Phone Number</label>
+
+                    <input type="tel" placeholder="+91 98765 43210" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Email</label>
+
+                    <input type="email" placeholder="customer@example.com">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Customer Type</label>
+
+                    <select>
+
+                        <option>New Customer</option>
+                        <option>Lead</option>
+                        <option>Existing Customer</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="modal-buttons">
+
+                    <button type="button" class="cancel-button" id="cancelModal">
+                        Cancel
+                    </button>
+
+                    <button type="submit" class="primary-button">
+                        Add Customer
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

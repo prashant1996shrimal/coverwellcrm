@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Coverwell Group - Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            /* height: 100vh; */
+            /* max-height: 70%; */
+            background: #f4f7fb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            /* padding: auto; */
+            /* overflow: hidden; */
+        }
+
+        .login-container {
+            display: flex;
+            width: 900px;
+            max-width: 100%;
+            min-height: 540px;
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Left Section */
+        .left-section {
+            width: 50%;
+            background: #2563eb;
+            color: rgb(255, 255, 255);
+            padding: 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 45px;
+
+        }
+
+        .left-section h1 {
+            font-size: 36px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .left-section p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #dbeafe;
+        }
+
+        .features {
+            margin-top: 35px;
+        }
+
+        .features p {
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        /* Right Section */
+        .right-section {
+            width: 50%;
+            padding: 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right-section h2 {
+            font-size: 28px;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #334155;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #2563eb;
+        }
+
+        .password-box {
+            position: relative;
+        }
+
+        .password-box input {
+            padding-right: 45px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 13px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #475569;
+        }
+
+        .forgot-password {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .login-button:hover {
+            background: #1d4ed8;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+
+            .login-container {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .left-section,
+            .right-section {
+                width: 100%;
+            }
+
+            .left-section {
+                padding: 30px;
+                min-height: 250px;
+            }
+
+            .left-section h1 {
+                font-size: 28px;
+            }
+
+            .logo {
+                margin-bottom: 25px;
+            }
+
+            .features {
+                margin-top: 20px;
+            }
+
+            .right-section {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <!-- Left Section -->
+        <div class="left-section">
+
+            <div class="logo">
+                <img src="logo.png" alt="Coverwell Group Logo" height="25" width="25">
+                <span>Coverwell Group</span>
+            </div>
+
+            <h1>
+                Connect your team.
+                Simplify every call.
+            </h1>
+
+            <p>
+                Manage your team's calls, track conversations,
+                and stay connected from one place.
+            </p>
+
+            <div class="features">
+                <p>✓ Team call management</p>
+                <p>✓ Call history and recordings</p>
+                <!-- <p>✓ Employee communication</p> -->
+                 <p>✓</p>
+                 <p>✓</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Login Section -->
+        <div class="right-section">
+
+            <h2>Welcome back!</h2>
+
+            <p class="subtitle">
+                Login to your Coverwell Group account
+            </p>
+
+            <form id="loginForm">
+
+                <!-- Email -->
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="password-box">
+
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+                        <button type="button" class="toggle-password" id="togglePassword">
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Project -->
+                <div class="form-group">
+
+                    <label for="project">
+                        Project
+                    </label>
+
+                    <select id="project" name="project" required>
+
+                        <option value="">
+                            Select Project
+                        </option>
+
+                        <option value="GJC_Mumbai">
+                            GJC Mumbai
+                        </option>
+
+                        <option value="JJS_Jaipur">
+                            JJS Jaipur
+                        </option>
+
+                        <option value="JGC_Jaipur">
+                            JGC Jaipur
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Remember / Forgot -->
+                <div class="options">
+
+                    <label class="remember">
+
+                        <input type="checkbox" id="remember">
+
+                        Remember me
+
+                    </label>
+
+                    <a href="#" class="forgot-password">
+                        Forgot password?
+                    </a>
+
+                </div>
+
+
+                <!-- Login Button -->
+                <button type="submit" class="login-button">
+                    Login
+                </button>
+
+                <p class="message" id="message"></p>
+
+            </form>
+
+
+            <div class="footer">
+                Coverwell Group. All rights reserved.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+    // Show / Hide Password
+
+    const passwordInput =
+        document.getElementById("password");
+
+    const togglePassword =
+        document.getElementById("togglePassword");
+
+    togglePassword.addEventListener("click", function () {
+
+        if (passwordInput.type === "password") {
+
+            passwordInput.type = "text";
+            togglePassword.textContent = "🙈";
+
+        } else {
+
+            passwordInput.type = "password";
+            togglePassword.textContent = "👁";
+
+        }
+
+    });
+
+
+    // Login Form
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const message =
+        document.getElementById("message");
+
+
+    loginForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const password =
+            document.getElementById("password").value;
+
+        const project =
+            document.getElementById("project").value;
+
+
+        // Check fields
+
+        if (
+            email === "" ||
+            password === "" ||
+            project === ""
+        ) {
+
+            message.style.color = "#dc2626";
+
+            message.textContent =
+                "Please fill in all fields.";
+
+            return;
+        }
+
+
+        // Login successful
+
+        message.style.color = "#16a34a";
+
+        message.textContent =
+            "Login successful! Opening dashboard...";
+
+
+        // Save login information
+
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("userEmail", email);
+        localStorage.setItem("project", project);
+
+
+        // Open dashboard
+
+        setTimeout(function() {
+
+            window.location.href = "index.html";
+
+        }, 800);
+
+    });
+
+
+    </script>
+
+</body>
+
+</html>
