@@ -1,0 +1,96 @@
+function logout(event) {
+
+    if (event) {
+        event.preventDefault();
+    }
+
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("project");
+
+    window.location.href = "login.html";
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const sidebarContainer =
+        document.getElementById("sidebar-container");
+
+    if (!sidebarContainer) {
+        console.error("Sidebar container not found");
+        return;
+    }
+
+    sidebarContainer.innerHTML = `
+   <aside class="sidebar">
+
+        <div class="logo">
+
+            <img src="logo.png">
+
+            <span>
+                Coverwell Group
+            </span>
+
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="dashboard.html" class="menu-item">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="employees.html" class="menu-item">
+
+                <i class="fa-solid fa-users"></i>
+
+                <span>Employees</span>
+
+            </a>
+
+
+            <a href="call-logs.html" class="menu-item">
+                <i class="fa-solid fa-phone"></i>
+                <span>Call Logs</span>
+            </a>
+
+
+            <a href="recordings.html" class="menu-item">
+
+                <i class="fa-solid fa-microphone"></i>
+
+                <span>Recordings</span>
+
+            </a>
+
+
+            <a href="reports.html" class="menu-item">
+
+                <i class="fa-solid fa-chart-column"></i>
+
+                <span>Reports</span>
+
+            </a>
+
+
+            <a href="#" class="menu-item" id="logoutButton">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>Logout</span>
+
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    `;
+});

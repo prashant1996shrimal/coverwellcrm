@@ -7,6 +7,8 @@
 
     <title>Coverwell CRM - Call Logs</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <style>
         * {
             margin: 0;
@@ -245,59 +247,10 @@
 
 <body>
 
-    <!-- FIXED SIDEBAR -->
-    <aside class="sidebar">
+        <!-- SIDEBAR -->
+<div id="sidebar-container"></div>
 
-        <div class="sidebar-logo">
-            <h2>Coverwell</h2>
-            <span>CRM</span>
-        </div>
-
-        <nav class="sidebar-menu">
-
-            <a href="dashboard.html" class="menu-item">
-                🏠
-                <span>Dashboard</span>
-            </a>
-
-            <a href="employees.html" class="menu-item">
-                👥
-                <span>Employees</span>
-            </a>
-
-            <a href="call-logs.html" class="menu-item">
-                📞
-                <span>Call Logs</span>
-            </a>
-
-            <a href="recordings.html" class="menu-item">
-                🎙️
-                <span>Recordings</span>
-            </a>
-
-            <a href="employee-performance.html" class="menu-item">
-                📊
-                <span>Performance</span>
-            </a>
-
-        </nav>
-
-        <div class="sidebar-bottom">
-
-            <a href="#" class="menu-item">
-                ⚙️
-                <span>Settings</span>
-            </a>
-
-            <a href="login.html" class="menu-item logout">
-                🚪
-                <span>Logout</span>
-            </a>
-
-        </div>
-
-    </aside>
-
+   
     <div class="container">
 
         <!-- Header -->
@@ -1110,6 +1063,9 @@
         loadEmployees();
         loadEmployeeStats();
     </script>
+
+    <script src="js/sidebar.js"></script>
+    <script src="components/sidebar.html"></script>
 
 </body>
 

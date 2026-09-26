@@ -22,7 +22,7 @@
             color: #1e293b;
         }
 
-        /* SIDEBAR */
+        /* SIDEBAR
 
         .sidebar {
             position: fixed;
@@ -85,14 +85,14 @@
 
         .menu-item i {
             width: 20px;
-        }
+        }*/
 
         /* MAIN */
 
         .main {
             margin-left: 240px;
             min-height: 100vh;
-        }
+        } 
 
         /* HEADER */
 
@@ -478,8 +478,9 @@
 
 
     <!-- SIDEBAR -->
+<div id="sidebar-container"></div>
 
-    <aside class="sidebar">
+    <!-- <aside class="sidebar">
 
         <div class="logo">
 
@@ -536,17 +537,14 @@
             </a>
 
 
-            <a href="#" class="menu-item" id="logoutButton">
-
-                <i class="fa-solid fa-right-from-bracket"></i>
-
-                <span>Logout</span>
-
-            </a>
+          <a href="#" class="menu-item logout" onclick="logout(event)">
+    🚪
+    <span>Logout</span>
+</a>
 
         </nav>
 
-    </aside>
+    </aside> -->
 
 
     <!-- MAIN -->
@@ -1399,31 +1397,31 @@
            LOGOUT
         ================================= */
 
-        document
-            .getElementById("logoutButton")
-            .addEventListener(
-                "click",
-                function (event) {
+        // document
+        //     .getElementById("logoutButton")
+        //     .addEventListener(
+        //         "click",
+        //         function (event) {
 
-                    event.preventDefault();
+        //             event.preventDefault();
 
-                    localStorage.removeItem(
-                        "loggedIn"
-                    );
+        //             localStorage.removeItem(
+        //                 "loggedIn"
+        //             );
 
-                    localStorage.removeItem(
-                        "userEmail"
-                    );
+        //             localStorage.removeItem(
+        //                 "userEmail"
+        //             );
 
-                    localStorage.removeItem(
-                        "project"
-                    );
+        //             localStorage.removeItem(
+        //                 "project"
+        //             );
 
-                    window.location.href =
-                        "login.html";
+        //             window.location.href =
+        //                 "login.html";
 
-                }
-            );
+        //         }
+        //     );
 
 
         /* ================================
@@ -1514,6 +1512,10 @@
     }
 }
     </script>
+    <script src="js/sidebar.js"></script>
+    <script src="components/sidebar.html"></script>
+    
+
 
 </body>
 
