@@ -1,9 +1,12 @@
 package com.coverwell.crm.controller;
 
-import com.coverwell.crm.model.User;
-import com.coverwell.crm.service.AuthService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.coverwell.crm.entity.User;
+import com.coverwell.crm.model.LoginRequest;
+import com.coverwell.crm.service.AuthService;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -17,25 +20,23 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<?> login(
+            @RequestBody LoginRequest request) {
 
-        User user = authService.login(
-                request.email(),
-                request.password()
-        );
+        try {
 
-        if (user == null) {
+            User user = authService.login(
+                    request.email(),
+                    request.password()
+            );
+
+            return ResponseEntity.ok(user);
+
+        } catch (RuntimeException e) {
+
             return ResponseEntity
-                    .status(401)
+                    .status(HttpStatus.UNAUTHORIZED)
                     .body("Invalid email or password");
         }
-
-        return ResponseEntity.ok(user);
-    }
-
-    public record LoginRequest(
-            String email,
-            String password
-    ) {
     }
 }

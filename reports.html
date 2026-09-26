@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Coverwell CRM - Reports</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: #1e293b;
+            font-size: 28px;
+        }
+
+        .header p {
+            color: #64748b;
+            margin-top: 6px;
+        }
+
+        .back-button {
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .back-button:hover {
+            background: #1d4ed8;
+        }
+
+        /* Statistics */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-card p {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card h2 {
+            color: #1e293b;
+            font-size: 28px;
+        }
+
+        /* Main card */
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        .toolbar {
+            padding: 20px;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .refresh {
+            padding: 12px 18px;
+            border: none;
+            background: #0f172a;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .refresh:hover {
+            background: #1e293b;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f8fafc;
+            padding: 15px;
+            text-align: left;
+            font-size: 13px;
+            color: #475569;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        td {
+            padding: 16px 15px;
+            font-size: 14px;
+            color: #334155;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .employee-name {
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        .number {
+            font-weight: bold;
+        }
+
+        .missed {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .loading,
+        .empty,
+        .error {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .loading,
+        .empty {
+            color: #64748b;
+        }
+
+        .error {
+            color: #dc2626;
+        }
+
+        @media (max-width: 900px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header {
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .filter {
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: white;
+            outline: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+
+        <div class="header">
+
+            <div>
+
+                <h1>Reports</h1>
+
+                <p>
+                    Employee call performance report
+                </p>
+
+            </div>
+
+            <a href="dashboard.html" class="back-button">
+
+                ← Dashboard
+
+            </a>
+
+        </div>
+
+
+        <!-- Statistics -->
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <p>Total Calls</p>
+
+                <h2 id="totalCalls">
+                    0
+                </h2>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p>Outgoing Calls</p>
+
+                <h2 id="outgoingCalls">
+                    0
+                </h2>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p>Incoming Calls</p>
+
+                <h2 id="incomingCalls">
+                    0
+                </h2>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p>Missed Calls</p>
+
+                <h2 id="missedCalls">
+                    0
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- Employee Report -->
+
+        <div class="card">
+
+            <div class="toolbar">
+
+                <select id="dateFilter" class="filter">
+
+                    <option value="ALL">
+                        All Time
+                    </option>
+
+                    <option value="TODAY">
+                        Today
+                    </option>
+
+                    <option value="WEEK">
+                        This Week
+                    </option>
+
+                    <option value="MONTH">
+                        This Month
+                    </option>
+
+                </select>
+
+
+                <button class="refresh" onclick="loadEmployeeReport()">
+
+                    Refresh
+
+                </button>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Employee ID</th>
+
+                            <th>Employee Name</th>
+
+                            <th>Total Calls</th>
+
+                            <th>Outgoing</th>
+
+                            <th>Incoming</th>
+
+                            <th>Missed</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="reportTable">
+
+                        <tr>
+
+                            <td colspan="6" class="loading">
+
+                                Loading employee statistics...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const API_URL =
+            "http://localhost:8080";
+
+        let employeeStats = [];
+
+
+        // ==========================================
+        // LOAD EMPLOYEE REPORT
+        // ==========================================
+
+        async function loadEmployeeReport() {
+
+            const table =
+                document.getElementById(
+                    "reportTable"
+                );
+
+
+            table.innerHTML = `
+        <tr>
+            <td colspan="6" class="loading">
+                Loading employee statistics...
+            </td>
+        </tr>
+    `;
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/call-logs/stats/employees`
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load employee statistics"
+                    );
+
+                }
+
+
+                employeeStats =
+                    await response.json();
+
+
+                displayEmployeeReport(
+                    employeeStats
+                );
+
+
+                calculateTotals(
+                    employeeStats
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                table.innerHTML = `
+            <tr>
+                <td colspan="6" class="error">
+                    Unable to load employee statistics.
+                </td>
+            </tr>
+        `;
+
+            }
+
+        }
+
+
+        // ==========================================
+        // DISPLAY EMPLOYEE REPORT
+        // ==========================================
+
+        function displayEmployeeReport(data) {
+
+            const table =
+                document.getElementById(
+                    "reportTable"
+                );
+
+
+            if (!data || data.length === 0) {
+
+                table.innerHTML = `
+            <tr>
+                <td colspan="6" class="empty">
+                    No employee statistics found.
+                </td>
+            </tr>
+        `;
+
+                return;
+            }
+
+
+            table.innerHTML = "";
+
+
+            data.forEach(employee => {
+
+                const row =
+                    document.createElement("tr");
+
+
+                row.innerHTML = `
+
+            <td>
+                ${employee.employeeId}
+            </td>
+
+            <td class="employee-name">
+                ${employee.employeeName}
+            </td>
+
+            <td class="number">
+                ${employee.totalCalls}
+            </td>
+
+            <td>
+                ${employee.outgoingCalls}
+            </td>
+
+            <td>
+                ${employee.incomingCalls}
+            </td>
+
+            <td class="missed">
+                ${employee.missedCalls}
+            </td>
+
+        `;
+
+
+                table.appendChild(row);
+
+            });
+
+        }
+
+
+        // ==========================================
+        // CALCULATE TOTALS
+        // ==========================================
+
+        function calculateTotals(data) {
+
+            let totalCalls = 0;
+            let outgoingCalls = 0;
+            let incomingCalls = 0;
+            let missedCalls = 0;
+
+
+            data.forEach(employee => {
+
+                totalCalls +=
+                    Number(employee.totalCalls || 0);
+
+                outgoingCalls +=
+                    Number(employee.outgoingCalls || 0);
+
+                incomingCalls +=
+                    Number(employee.incomingCalls || 0);
+
+                missedCalls +=
+                    Number(employee.missedCalls || 0);
+
+            });
+
+
+            document.getElementById(
+                "totalCalls"
+            ).textContent = totalCalls;
+
+
+            document.getElementById(
+                "outgoingCalls"
+            ).textContent = outgoingCalls;
+
+
+            document.getElementById(
+                "incomingCalls"
+            ).textContent = incomingCalls;
+
+
+            document.getElementById(
+                "missedCalls"
+            ).textContent = missedCalls;
+
+        }
+
+
+        // ==========================================
+        // INITIAL LOAD
+        // ==========================================
+
+        loadEmployeeReport();
+
+    </script>
+
+</body>
+
+</html>

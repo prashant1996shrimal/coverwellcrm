@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Coverwell CRM - Employee Performance</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: #1e293b;
+            font-size: 28px;
+        }
+
+        .header p {
+            color: #64748b;
+            margin-top: 6px;
+        }
+
+        .back-button {
+            background: #0f172a;
+            color: white;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 8px;
+        }
+
+        /* EMPLOYEE CARD */
+
+        .employee-card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .employee-info {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .employee-info h2 {
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .active {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .inactive {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        /* STATISTICS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-card p {
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card h2 {
+            color: #1e293b;
+            font-size: 25px;
+        }
+
+        /* CALL HISTORY */
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-header {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .card-header h2 {
+            color: #1e293b;
+            font-size: 20px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        th {
+            background: #f8fafc;
+            text-align: left;
+            padding: 14px;
+            font-size: 13px;
+            color: #475569;
+        }
+
+        td {
+            padding: 15px;
+            border-top: 1px solid #f1f5f9;
+            font-size: 14px;
+            color: #334155;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .type,
+        .status {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .outgoing {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .incoming {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .completed {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .missed {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .empty,
+        .loading,
+        .error {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .empty,
+        .loading {
+            color: #64748b;
+        }
+
+        .error {
+            color: #dc2626;
+        }
+
+        @media (max-width: 1100px) {
+
+            .stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div>
+
+            <h1>
+                Employee Performance
+            </h1>
+
+            <p>
+                Employee call activity and history
+            </p>
+
+        </div>
+
+        <a
+            href="employees.html"
+            class="back-button">
+
+            ← Employees
+
+        </a>
+
+    </div>
+
+
+    <!-- EMPLOYEE INFORMATION -->
+
+    <div class="employee-card">
+
+        <div class="employee-info">
+
+            <div
+                class="avatar"
+                id="avatar">
+
+                --
+
+            </div>
+
+
+            <div>
+
+                <h2 id="employeeName">
+                    Loading...
+                </h2>
+
+
+                <div class="details">
+
+                    <span id="employeeEmail">
+                        --
+                    </span>
+
+                    <span id="employeePhone">
+                        --
+                    </span>
+
+                    <span id="employeeRole">
+                        --
+                    </span>
+
+                    <span
+                        class="badge"
+                        id="employeeStatus">
+
+                        --
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <p>Total Calls</p>
+
+            <h2 id="totalCalls">
+                0
+            </h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <p>Outgoing</p>
+
+            <h2 id="outgoingCalls">
+                0
+            </h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <p>Incoming</p>
+
+            <h2 id="incomingCalls">
+                0
+            </h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <p>Completed</p>
+
+            <h2 id="completedCalls">
+                0
+            </h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <p>Missed</p>
+
+            <h2 id="missedCalls">
+                0
+            </h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <p>Total Talk Time</p>
+
+            <h2 id="talkTime">
+                00:00:00
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <!-- CALL HISTORY -->
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h2>
+                Call History
+            </h2>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Phone Number</th>
+
+                    <th>Type</th>
+
+                    <th>Start</th>
+
+                    <th>End</th>
+
+                    <th>Duration</th>
+
+                    <th>Status</th>
+
+                    <th>Notes</th>
+
+                </tr>
+
+                </thead>
+
+
+                <tbody id="callTable">
+
+                <tr>
+
+                    <td
+                        colspan="8"
+                        class="loading">
+
+                        Loading call history...
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const API_URL =
+    "http://localhost:8080";
+
+
+/*
+    Get employee ID from URL
+
+    Example:
+
+    employee-details.html?id=5
+*/
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const employeeId =
+    params.get("id");
+
+
+if (!employeeId) {
+
+    document.body.innerHTML = `
+        <h2 style="padding:40px">
+            Employee ID is missing.
+        </h2>
+    `;
+
+}
+
+
+// Load employee
+
+async function loadEmployee() {
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/api/employees/${employeeId}`
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Employee not found"
+            );
+
+        }
+
+
+        const employee =
+            await response.json();
+
+
+        document.getElementById(
+            "employeeName"
+        ).textContent =
+            employee.name;
+
+
+        document.getElementById(
+            "employeeEmail"
+        ).textContent =
+            employee.email;
+
+
+        document.getElementById(
+            "employeePhone"
+        ).textContent =
+            employee.phone;
+
+
+        document.getElementById(
+            "employeeRole"
+        ).textContent =
+            employee.role;
+
+
+        const status =
+            document.getElementById(
+                "employeeStatus"
+            );
+
+
+        status.textContent =
+            employee.status;
+
+
+        status.className =
+            "badge " +
+            (
+                employee.status === "ACTIVE"
+                    ? "active"
+                    : "inactive"
+            );
+
+
+        document.getElementById(
+            "avatar"
+        ).textContent =
+            employee.name
+                .charAt(0)
+                .toUpperCase();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        document.getElementById(
+            "employeeName"
+        ).textContent =
+            "Unable to load employee";
+
+    }
+
+}
+
+
+// Load call history
+
+async function loadCalls() {
+
+    const table =
+        document.getElementById(
+            "callTable"
+        );
+
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/api/call-logs/employee/${employeeId}`
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load calls"
+            );
+
+        }
+
+
+        const calls =
+            await response.json();
+
+
+        updateStatistics(
+            calls
+        );
+
+
+        displayCalls(
+            calls
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="8"
+                    class="error">
+                    Unable to load call history.
+                </td>
+            </tr>
+        `;
+
+    }
+
+}
+
+
+// Statistics
+
+function updateStatistics(calls) {
+
+    document.getElementById(
+        "totalCalls"
+    ).textContent =
+        calls.length;
+
+
+    document.getElementById(
+        "outgoingCalls"
+    ).textContent =
+        calls.filter(
+            call =>
+                call.callType === "OUTGOING"
+        ).length;
+
+
+    document.getElementById(
+        "incomingCalls"
+    ).textContent =
+        calls.filter(
+            call =>
+                call.callType === "INCOMING"
+        ).length;
+
+
+    document.getElementById(
+        "completedCalls"
+    ).textContent =
+        calls.filter(
+            call =>
+                call.status === "COMPLETED"
+        ).length;
+
+
+    document.getElementById(
+        "missedCalls"
+    ).textContent =
+        calls.filter(
+            call =>
+                call.status === "MISSED"
+        ).length;
+
+
+    const totalSeconds =
+        calls.reduce(
+            (total, call) =>
+                total +
+                (call.durationSeconds || 0),
+            0
+        );
+
+
+    document.getElementById(
+        "talkTime"
+    ).textContent =
+        formatTalkTime(
+            totalSeconds
+        );
+
+}
+
+
+// Talk time
+
+function formatTalkTime(seconds) {
+
+    const hours =
+        Math.floor(
+            seconds / 3600
+        );
+
+
+    const minutes =
+        Math.floor(
+            (seconds % 3600) / 60
+        );
+
+
+    const remaining =
+        seconds % 60;
+
+
+    return (
+        String(hours).padStart(2, "0")
+        +
+        ":"
+        +
+        String(minutes).padStart(2, "0")
+        +
+        ":"
+        +
+        String(remaining).padStart(2, "0")
+    );
+
+}
+
+
+// Duration
+
+function formatDuration(seconds) {
+
+    if (!seconds) {
+        return "00:00";
+    }
+
+
+    const minutes =
+        Math.floor(
+            seconds / 60
+        );
+
+
+    const remaining =
+        seconds % 60;
+
+
+    return (
+        String(minutes).padStart(2, "0")
+        +
+        ":"
+        +
+        String(remaining).padStart(2, "0")
+    );
+
+}
+
+
+// Date
+
+function formatDate(dateString) {
+
+    if (!dateString) {
+        return "-";
+    }
+
+
+    return new Date(
+        dateString
+    ).toLocaleString(
+        "en-IN",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        }
+    );
+
+}
+
+
+// Display calls
+
+function displayCalls(calls) {
+
+    const table =
+        document.getElementById(
+            "callTable"
+        );
+
+
+    if (!calls || calls.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="8"
+                    class="empty">
+                    No calls found for this employee.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    table.innerHTML = "";
+
+
+    calls.forEach(call => {
+
+        const row =
+            document.createElement("tr");
+
+
+        const typeClass =
+            call.callType === "OUTGOING"
+                ? "outgoing"
+                : "incoming";
+
+
+        const statusClass =
+            call.status
+                ? call.status.toLowerCase()
+                : "";
+
+
+        row.innerHTML = `
+
+            <td>
+                ${call.id}
+            </td>
+
+            <td>
+                ${call.phoneNumber || "-"}
+            </td>
+
+            <td>
+
+                <span class="type ${typeClass}">
+                    ${call.callType || "-"}
+                </span>
+
+            </td>
+
+            <td>
+                ${formatDate(
+                    call.callStart
+                )}
+            </td>
+
+            <td>
+                ${formatDate(
+                    call.callEnd
+                )}
+            </td>
+
+            <td>
+                ${formatDuration(
+                    call.durationSeconds
+                )}
+            </td>
+
+            <td>
+
+                <span class="status ${statusClass}">
+                    ${call.status || "-"}
+                </span>
+
+            </td>
+
+            <td>
+                ${call.notes || "-"}
+            </td>
+
+        `;
+
+
+        table.appendChild(row);
+
+    });
+
+}
+
+
+// Start
+
+if (employeeId) {
+
+    loadEmployee();
+
+    loadCalls();
+
+}
+
+</script>
+
+</body>
+
+</html>

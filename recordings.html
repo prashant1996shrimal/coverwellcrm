@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Coverwell CRM - Recordings</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: #1e293b;
+            font-size: 28px;
+        }
+
+        .header p {
+            color: #64748b;
+            margin-top: 6px;
+        }
+
+        .back-button {
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .back-button:hover {
+            background: #1d4ed8;
+        }
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        .toolbar {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .search-box:focus {
+            border-color: #2563eb;
+        }
+
+        .refresh-button {
+            border: none;
+            background: #0f172a;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #475569;
+            font-size: 13px;
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        td {
+            padding: 16px 15px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .employee {
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        .badge {
+            padding: 5px 9px;
+            border-radius: 20px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        audio {
+            width: 230px;
+            height: 38px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
+        }
+
+        .error {
+            text-align: center;
+            padding: 30px;
+            color: #dc2626;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
+        }
+
+        @media (max-width: 800px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .header {
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            table {
+                min-width: 900px;
+            }
+
+            .card {
+                overflow-x: auto;
+            }
+        }
+
+        .recording-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            align-items: center;
+        }
+
+        .download-button {
+            display: inline-block;
+            padding: 7px 12px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .download-button:hover {
+            background: #1d4ed8;
+        }
+
+        .delete-button {
+            padding: 7px 12px;
+            background: #dc2626;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background: #b91c1c;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+
+            <div>
+                <h1>Call Recordings</h1>
+                <p>View and listen to employee call recordings</p>
+            </div>
+
+            <a href="dashboard.html" class="back-button">
+                ← Dashboard
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="toolbar">
+
+                <input type="text" id="search" class="search-box"
+                    placeholder="Search by employee, phone or file name...">
+
+                <button class="refresh-button" onclick="loadRecordings()">
+                    Refresh
+                </button>
+
+            </div>
+
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Employee</th>
+                        <th>Phone</th>
+                        <th>Call Type</th>
+                        <th>Duration</th>
+                        <th>Recording</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="recordingsTable">
+
+                    <tr>
+                        <td colspan="6" class="loading">
+                            Loading recordings...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const API_URL = "http://localhost:8080";
+
+        let recordings = [];
+        let callLogs = [];
+
+
+        // ==========================================
+        // LOAD RECORDINGS
+        // ==========================================
+
+        async function loadRecordings() {
+
+            const table =
+                document.getElementById("recordingsTable");
+
+            table.innerHTML = `
+        <tr>
+            <td colspan="6" class="loading">
+                Loading recordings...
+            </td>
+        </tr>
+    `;
+
+            try {
+
+                // Load recordings
+                const recordingsResponse =
+                    await fetch(`${API_URL}/api/recordings`);
+
+                if (!recordingsResponse.ok) {
+                    throw new Error("Failed to load recordings");
+                }
+
+                recordings =
+                    await recordingsResponse.json();
+
+
+                // Load call logs
+                const callLogsResponse =
+                    await fetch(`${API_URL}/api/call-logs`);
+
+                if (!callLogsResponse.ok) {
+                    throw new Error("Failed to load call logs");
+                }
+
+                callLogs =
+                    await callLogsResponse.json();
+
+
+                displayRecordings(recordings);
+
+            } catch (error) {
+
+                console.error("Recording loading error:", error);
+
+                table.innerHTML = `
+            <tr>
+                <td colspan="6" class="error">
+                    Unable to load recordings.
+                </td>
+            </tr>
+        `;
+            }
+        }
+
+
+        // ==========================================
+        // DISPLAY RECORDINGS
+        // ==========================================
+
+        function displayRecordings(data) {
+
+            const table =
+                document.getElementById("recordingsTable");
+
+            if (!data || data.length === 0) {
+
+                table.innerHTML = `
+            <tr>
+                <td colspan="6" class="empty">
+                    No recordings found.
+                </td>
+            </tr>
+        `;
+
+                return;
+            }
+
+
+            table.innerHTML = "";
+
+
+            data.forEach(recording => {
+
+                const row =
+                    document.createElement("tr");
+
+
+                // Find matching call log
+                const call =
+                    callLogs.find(
+                        c => c.id === recording.callLogId
+                    );
+
+
+                // Employee name
+                const employeeName =
+                    call && call.employee
+                        ? call.employee.name
+                        : `Employee #${recording.employeeId}`;
+
+
+                // Phone number
+                const phone =
+                    call
+                        ? call.phoneNumber || "-"
+                        : "-";
+
+
+                // Call type
+                const callType =
+                    call
+                        ? call.callType || "-"
+                        : "-";
+
+
+                // Duration
+                const duration =
+                    call
+                        ? formatDuration(
+                            call.durationSeconds
+                        )
+                        : "-";
+
+
+                // Recording URL
+                const recordingUrl =
+                    `${API_URL}/api/recordings/play/${recording.id}`;
+
+
+                row.innerHTML = `
+
+            <td>
+                ${recording.id}
+            </td>
+
+
+            <td class="employee">
+                ${employeeName}
+            </td>
+
+
+            <td>
+                ${phone}
+            </td>
+
+
+            <td>
+
+                <span class="badge">
+                    ${callType}
+                </span>
+
+            </td>
+
+
+            <td>
+                ${duration}
+            </td>
+
+
+            <td>
+
+    <audio
+        controls
+        preload="none">
+
+        <source
+            src="${recordingUrl}"
+            type="audio/mpeg">
+
+        Your browser does not support
+        audio playback.
+
+    </audio>
+
+    <div class="recording-actions">
+
+        <a
+            href="${API_URL}/api/recordings/download/${recording.id}"
+            class="download-button">
+
+            Download
+
+        </a>
+
+        <button
+            class="delete-button"
+            onclick="deleteRecording(${recording.id})">
+
+            Delete
+
+        </button>
+
+    </div>
+
+</td>
+
+        `;
+
+
+                table.appendChild(row);
+
+            });
+
+        }
+
+
+        // ==========================================
+        // FORMAT DURATION
+        // ==========================================
+
+        function formatDuration(seconds) {
+
+            if (!seconds || seconds <= 0) {
+                return "00:00";
+            }
+
+
+            const minutes =
+                Math.floor(seconds / 60);
+
+
+            const remainingSeconds =
+                seconds % 60;
+
+
+            return (
+                String(minutes).padStart(2, "0")
+                +
+                ":"
+                +
+                String(remainingSeconds).padStart(2, "0")
+            );
+        }
+
+
+        // ==========================================
+        // SEARCH
+        // ==========================================
+
+        // Search
+
+        document
+            .getElementById("search")
+            .addEventListener("input", function () {
+
+                const search =
+                    this.value.toLowerCase().trim();
+
+                const filtered =
+                    recordings.filter(recording => {
+
+                        const call =
+                            callLogs.find(
+                                c => c.id === recording.callLogId
+                            );
+
+                        const employeeName =
+                            call && call.employee
+                                ? call.employee.name
+                                : "";
+
+                        const phone =
+                            call
+                                ? String(call.phoneNumber || "")
+                                : "";
+
+                        const fileName =
+                            String(recording.fileName || "");
+
+                        const callLogId =
+                            String(recording.callLogId || "");
+
+                        return (
+                            employeeName.toLowerCase().includes(search)
+                            ||
+                            phone.includes(search)
+                            ||
+                            fileName.toLowerCase().includes(search)
+                            ||
+                            callLogId.includes(search)
+                        );
+
+                    });
+
+                displayRecordings(filtered);
+
+            });
+
+
+        // ==========================================
+        // DELETE RECORDING
+        // ==========================================
+
+        async function deleteRecording(id) {
+
+            const confirmed =
+                confirm(
+                    "Are you sure you want to delete this recording?"
+                );
+
+            if (!confirmed) {
+                return;
+            }
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/recordings/${id}`,
+                        {
+                            method: "DELETE"
+                        }
+                    );
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to delete recording"
+                    );
+
+                }
+
+                alert("Recording deleted successfully.");
+
+                // Reload recordings
+                loadRecordings();
+
+            } catch (error) {
+
+                console.error(
+                    "Delete recording error:",
+                    error
+                );
+
+                alert(
+                    "Unable to delete recording."
+                );
+            }
+        }
+
+
+        // ==========================================
+        // INITIAL LOAD
+        // ==========================================
+
+        loadRecordings();
+    </script>
+</body>
+
+</html>

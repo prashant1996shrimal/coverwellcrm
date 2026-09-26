@@ -1,8 +1,9 @@
 package com.coverwell.crm.service;
 
-import com.coverwell.crm.model.User;
-import com.coverwell.crm.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
+import com.coverwell.crm.entity.User;
+import com.coverwell.crm.repository.UserRepository;
 
 @Service
 public class AuthService {
@@ -18,16 +19,19 @@ public class AuthService {
         User user = userRepository.findByEmail(email)
                 .orElse(null);
 
+        // Email not found
         if (user == null) {
-            return null;
+            throw new RuntimeException("Invalid email or password");
         }
 
-        if (!user.getActive()) {
-            return null;
-        }
-
+        // Password incorrect
         if (!user.getPassword().equals(password)) {
-            return null;
+            throw new RuntimeException("Invalid email or password");
+        }
+
+        // Account inactive
+        if (!user.isActive()) {
+            throw new RuntimeException("User account is inactive");
         }
 
         return user;
