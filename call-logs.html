@@ -245,6 +245,59 @@
 
 <body>
 
+    <!-- FIXED SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <h2>Coverwell</h2>
+            <span>CRM</span>
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="dashboard.html" class="menu-item">
+                🏠
+                <span>Dashboard</span>
+            </a>
+
+            <a href="employees.html" class="menu-item">
+                👥
+                <span>Employees</span>
+            </a>
+
+            <a href="call-logs.html" class="menu-item">
+                📞
+                <span>Call Logs</span>
+            </a>
+
+            <a href="recordings.html" class="menu-item">
+                🎙️
+                <span>Recordings</span>
+            </a>
+
+            <a href="employee-performance.html" class="menu-item">
+                📊
+                <span>Performance</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="#" class="menu-item">
+                ⚙️
+                <span>Settings</span>
+            </a>
+
+            <a href="login.html" class="menu-item logout">
+                🚪
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
     <div class="container">
 
         <!-- Header -->
@@ -538,11 +591,11 @@
 
         // Load call logs
 
-       async function loadCallLogs() {
+        async function loadCallLogs() {
 
-    const table = document.getElementById("callLogsTable");
+            const table = document.getElementById("callLogsTable");
 
-    table.innerHTML = `
+            table.innerHTML = `
         <tr>
             <td colspan="9" class="loading">
                 Loading call logs...
@@ -550,69 +603,69 @@
         </tr>
     `;
 
-    try {
+            try {
 
-        const response = await fetch(
-            "http://localhost:8080/api/call-logs"
-        );
+                const response = await fetch(
+                    "http://localhost:8080/api/call-logs"
+                );
 
-        if (!response.ok) {
-            throw new Error("Failed to load call logs");
-        }
+                if (!response.ok) {
+                    throw new Error("Failed to load call logs");
+                }
 
-        callLogs = await response.json();
+                callLogs = await response.json();
 
-        updateStatistics();
+                updateStatistics();
 
-        displayCallLogs(callLogs);
+                displayCallLogs(callLogs);
 
-    } catch (error) {
+            } catch (error) {
 
-        console.error(error);
+                console.error(error);
 
-        table.innerHTML = `
+                table.innerHTML = `
             <tr>
                 <td colspan="9" class="error">
                     Unable to load call logs.
                 </td>
             </tr>
         `;
-    }
-}
+            }
+        }
         // Statistics
 
         async function updateStatistics() {
 
-    try {
+            try {
 
-        const response = await fetch(
-            "http://localhost:8080/api/dashboard/stats"
-        );
+                const response = await fetch(
+                    "http://localhost:8080/api/dashboard/stats"
+                );
 
-        if (!response.ok) {
-            throw new Error("Failed to load dashboard statistics");
+                if (!response.ok) {
+                    throw new Error("Failed to load dashboard statistics");
+                }
+
+                const stats = await response.json();
+
+                document.getElementById("totalCalls").textContent =
+                    stats.totalCalls;
+
+                document.getElementById("outgoingCalls").textContent =
+                    stats.totalOutgoingCalls;
+
+                document.getElementById("incomingCalls").textContent =
+                    stats.totalIncomingCalls;
+
+                document.getElementById("missedCalls").textContent =
+                    stats.missedCalls;
+
+            } catch (error) {
+
+                console.error("Statistics error:", error);
+
+            }
         }
-
-        const stats = await response.json();
-
-        document.getElementById("totalCalls").textContent =
-            stats.totalCalls;
-
-        document.getElementById("outgoingCalls").textContent =
-            stats.totalOutgoingCalls;
-
-        document.getElementById("incomingCalls").textContent =
-            stats.totalIncomingCalls;
-
-        document.getElementById("missedCalls").textContent =
-            stats.missedCalls;
-
-    } catch (error) {
-
-        console.error("Statistics error:", error);
-
-    }
-}
         async function loadEmployees() {
 
             const employeeFilter =
@@ -1049,7 +1102,7 @@
         // callLogs = await response.json();
 
         loadEmployeeFilter();
-   
+
         updateStatistics(callLogs);
 
         displayCallLogs(callLogs);

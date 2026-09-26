@@ -442,7 +442,7 @@
 
                         <tr>
 
-                            <td colspan="7" class="loading">
+                            <td colspan="8" class="loading">
 
                                 Loading employees...
 
@@ -597,7 +597,7 @@
 
             table.innerHTML = `
         <tr>
-            <td colspan="7"
+            <td colspan="8"
                 class="loading">
                 Loading employees...
             </td>
@@ -643,7 +643,7 @@
 
                 table.innerHTML = `
             <tr>
-                <td colspan="7"
+                <td colspan="8"
                     class="error">
                     Unable to load employees.
                 </td>
@@ -714,7 +714,7 @@
 
                 table.innerHTML = `
             <tr>
-                <td colspan="7"
+                <td colspan="8"
                     class="empty">
                     No employees found.
                 </td>
@@ -742,58 +742,51 @@
 
 
                 row.innerHTML = `
-<td>
-    <a
-        href="employee-details.html?id=${employee.id}"
-        style="
-            color:#2563eb;
-            text-decoration:none;
-            font-weight:bold;
-        "
-    >
-        View
-    </a>
-</td>
-            <td>
-                ${employee.id}
-            </td>
+    <td>
+        ${employee.id}
+    </td>
 
-            <td class="employee-name">
-                ${employee.name}
-            </td>
+    <td class="employee-name">
+        ${employee.name}
+    </td>
 
-            <td>
-                ${employee.email}
-            </td>
+    <td>
+        ${employee.email}
+    </td>
 
-            <td>
-                ${employee.phone}
-            </td>
+    <td>
+        ${employee.phone}
+    </td>
 
-            <td>
+    <td>
+        <span class="badge role">
+            ${employee.role}
+        </span>
+    </td>
 
-                <span class="badge role">
-                    ${employee.role}
-                </span>
+    <td>
+        <span class="badge ${statusClass}">
+            ${employee.status}
+        </span>
+    </td>
 
-            </td>
+    <td>
+        ${formatDate(employee.createdAt)}
+    </td>
 
-            <td>
-
-                <span class="badge ${statusClass}">
-                    ${employee.status}
-                </span>
-
-            </td>
-
-            <td>
-                ${formatDate(
-                    employee.createdAt
-                )}
-            </td>
-
-        `;
-
+    <td>
+        <a
+            href="employee-details.html?id=${employee.id}"
+            style="
+                color:#2563eb;
+                text-decoration:none;
+                font-weight:bold;
+            "
+        >
+            View
+        </a>
+    </td>
+`;
 
                 table.appendChild(row);
 
