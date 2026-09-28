@@ -1,76 +1,68 @@
-* {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<aside class="sidebar">
 
-        body {
-            background: #f5f7fb;
-            color: #1e293b;
-        }
+        <div class="logo">
 
-        /* SIDEBAR */
+            <img src="image/logo.png">
 
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
+            <span>
+                Coverwell Group
+            </span>
 
-            width: 240px;
-            height: 100vh;
+        </div>
 
-            background: #111827;
-            color: white;
 
-            padding: 25px 15px;
-        }
+        <nav class="menu">
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            <a href="dashboard.html" class="menu-item">
 
-            padding: 10px;
-            margin-bottom: 35px;
+                <i class="fa-solid fa-chart-line"></i>
 
-            font-size: 19px;
-            font-weight: bold;
-        }
+                <span>Dashboard</span>
 
-        .logo img {
-            width: 35px;
-            height: 35px;
-            object-fit: contain;
-        }
+            </a>
 
-        .menu {
-            display: flex;
-            flex-direction: column;
-            gap: 7px;
-        }
 
-        .menu-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
+            <a href="employees.html" class="menu-item">
 
-            padding: 13px 15px;
+                <i class="fa-solid fa-users"></i>
 
-            color: #cbd5e1;
-            text-decoration: none;
+                <span>Employees</span>
 
-            border-radius: 8px;
+            </a>
 
-            transition: 0.2s;
-        }
 
-        .menu-item:hover,
-        .menu-item.active {
-            background: #2563eb;
-            color: white;
-        }
+            <a href="call-logs.html" class="menu-item">
+                <i class="fa-solid fa-phone"></i>
+                <span>Call Logs</span>
+            </a>
 
-        .menu-item i {
-            width: 20px;
-        }
+
+            <a href="recordings.html" class="menu-item">
+
+                <i class="fa-solid fa-microphone"></i>
+
+                <span>Recordings</span>
+
+            </a>
+
+
+            <a href="reports.html" class="menu-item">
+
+                <i class="fa-solid fa-chart-column"></i>
+
+                <span>Reports</span>
+
+            </a>
+
+
+            <a href="#" class="menu-item" id="logoutButton">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>Logout</span>
+
+            </a>
+
+        </nav>
+
+    </aside>

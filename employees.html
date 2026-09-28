@@ -6,14 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Coverwell CRM - Employees</title>
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
-        * {
+        /* * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: Arial, sans-serif;
-        }
+        } */
+
+        /* MAIN */
+
+        .main {
+            margin-left: 240px;
+            min-height: 100vh;
+        } 
 
         body {
             background: #f4f7fb;
@@ -313,6 +322,9 @@
 
 <body>
 
+    <div id="sidebar-container"></div>
+<main class="main">
+
     <div class="container">
 
         <!-- HEADER -->
@@ -331,12 +343,6 @@
 
 
             <div class="header-buttons">
-
-                <a href="dashboard.html" class="back-button">
-
-                    ← Dashboard
-
-                </a>
 
                 <button class="add-button" onclick="openModal()">
 
@@ -575,7 +581,7 @@
         </div>
 
     </div>
-
+</main>
 
     <script>
 
@@ -1009,6 +1015,7 @@
         loadEmployees();
 
     </script>
+    <script src="js/sidebar.js"></script>
 
 </body>
 

@@ -1,96 +1,59 @@
-function logout(event) {
-
-    if (event) {
-        event.preventDefault();
-    }
-
-    localStorage.removeItem("loggedIn");
-    localStorage.removeItem("userEmail");
-    localStorage.removeItem("project");
-
-    window.location.href = "login.html";
-}
-
 document.addEventListener("DOMContentLoaded", function () {
 
     const sidebarContainer =
         document.getElementById("sidebar-container");
 
     if (!sidebarContainer) {
-        console.error("Sidebar container not found");
+        console.error("sidebar-container not found");
         return;
     }
 
-    sidebarContainer.innerHTML = `
-   <aside class="sidebar">
+    fetch("components/sidebar.html")
+        .then(response => {
 
-        <div class="logo">
+            if (!response.ok) {
+                throw new Error(
+                    "Sidebar failed to load: " +
+                    response.status
+                );
+            }
 
-            <img src="logo.png">
+            return response.text();
+        })
+        .then(html => {
 
-            <span>
-                Coverwell Group
-            </span>
+            sidebarContainer.innerHTML = html;
 
-        </div>
+            const logoutButton =
+                document.getElementById("logoutButton");
 
+            if (logoutButton) {
 
-        <nav class="menu">
+                logoutButton.addEventListener(
+                    "click",
+                    function (event) {
 
-            <a href="dashboard.html" class="menu-item">
+                        event.preventDefault();
 
-                <i class="fa-solid fa-chart-line"></i>
+                        localStorage.removeItem("loggedIn");
+                        localStorage.removeItem("userEmail");
+                        localStorage.removeItem("project");
 
-                <span>Dashboard</span>
+                        window.location.href =
+                            "login.html";
+                    }
+                );
 
-            </a>
+            }
 
+        })
+        .catch(error => {
 
-            <a href="employees.html" class="menu-item">
+            console.error(
+                "Sidebar loading error:",
+                error
+            );
 
-                <i class="fa-solid fa-users"></i>
+        });
 
-                <span>Employees</span>
-
-            </a>
-
-
-            <a href="call-logs.html" class="menu-item">
-                <i class="fa-solid fa-phone"></i>
-                <span>Call Logs</span>
-            </a>
-
-
-            <a href="recordings.html" class="menu-item">
-
-                <i class="fa-solid fa-microphone"></i>
-
-                <span>Recordings</span>
-
-            </a>
-
-
-            <a href="reports.html" class="menu-item">
-
-                <i class="fa-solid fa-chart-column"></i>
-
-                <span>Reports</span>
-
-            </a>
-
-
-            <a href="#" class="menu-item" id="logoutButton">
-
-                <i class="fa-solid fa-right-from-bracket"></i>
-
-                <span>Logout</span>
-
-            </a>
-
-        </nav>
-
-    </aside>
-
-
-    `;
 });

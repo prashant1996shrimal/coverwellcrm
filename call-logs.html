@@ -7,15 +7,26 @@
 
     <title>Coverwell CRM - Call Logs</title>
 
+    <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: Ari
+            
+            al, sans-serif;
         }
+
+/* MAIN */
+
+        .main {
+            margin-left: 240px;
+            min-height: 100vh;
+        } 
 
         body {
             background: #f4f7fb;
@@ -250,7 +261,8 @@
         <!-- SIDEBAR -->
 <div id="sidebar-container"></div>
 
-   
+<main class="main">
+
     <div class="container">
 
         <!-- Header -->
@@ -266,12 +278,6 @@
                 </p>
 
             </div>
-
-            <a href="dashboard.html" class="back-button">
-
-                ← Dashboard
-
-            </a>
 
         </div>
 
@@ -489,6 +495,7 @@
         </div>
 
     </div>
+    </main>
 
 
     <script>
@@ -1064,8 +1071,9 @@
         loadEmployeeStats();
     </script>
 
+
     <script src="js/sidebar.js"></script>
-    <script src="components/sidebar.html"></script>
+
 
 </body>
 

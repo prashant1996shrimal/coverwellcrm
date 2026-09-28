@@ -7,6 +7,7 @@
 
     <title>Coverwell CRM - Call Logs</title>
 
+    <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
@@ -21,71 +22,6 @@
             background: #f5f7fb;
             color: #1e293b;
         }
-
-        /* SIDEBAR
-
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-
-            width: 240px;
-            height: 100vh;
-
-            background: #111827;
-            color: white;
-
-            padding: 25px 15px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-
-            padding: 10px;
-            margin-bottom: 35px;
-
-            font-size: 19px;
-            font-weight: bold;
-        }
-
-        .logo img {
-            width: 35px;
-            height: 35px;
-            object-fit: contain;
-        }
-
-        .menu {
-            display: flex;
-            flex-direction: column;
-            gap: 7px;
-        }
-
-        .menu-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-
-            padding: 13px 15px;
-
-            color: #cbd5e1;
-            text-decoration: none;
-
-            border-radius: 8px;
-
-            transition: 0.2s;
-        }
-
-        .menu-item:hover,
-        .menu-item.active {
-            background: #2563eb;
-            color: white;
-        }
-
-        .menu-item i {
-            width: 20px;
-        }*/
 
         /* MAIN */
 
@@ -480,73 +416,6 @@
     <!-- SIDEBAR -->
 <div id="sidebar-container"></div>
 
-    <!-- <aside class="sidebar">
-
-        <div class="logo">
-
-            <img src="logo.png">
-
-            <span>
-                Coverwell Group
-            </span>
-
-        </div>
-
-
-        <nav class="menu">
-
-            <a href="dashboard.html" class="menu-item">
-
-                <i class="fa-solid fa-chart-line"></i>
-
-                <span>Dashboard</span>
-
-            </a>
-
-
-            <a href="employees.html" class="menu-item">
-
-                <i class="fa-solid fa-users"></i>
-
-                <span>Employees</span>
-
-            </a>
-
-
-            <a href="call-logs.html" class="menu-item">
-                <i class="fa-solid fa-phone"></i>
-                <span>Call Logs</span>
-            </a>
-
-
-            <a href="recordings.html" class="menu-item">
-
-                <i class="fa-solid fa-microphone"></i>
-
-                <span>Recordings</span>
-
-            </a>
-
-
-            <a href="reports.html" class="menu-item">
-
-                <i class="fa-solid fa-chart-column"></i>
-
-                <span>Reports</span>
-
-            </a>
-
-
-          <a href="#" class="menu-item logout" onclick="logout(event)">
-    🚪
-    <span>Logout</span>
-</a>
-
-        </nav>
-
-    </aside> -->
-
-
     <!-- MAIN -->
 
     <main class="main">
@@ -636,7 +505,7 @@
 
                     <div class="stat-icon">
 
-                        <img src="outgoing-icon.png" 
+                        <img src="image/outgoing-icon.png" 
                             alt="Outgoing Calls" 
                             style="width: 20px; height: 20px;">
 
@@ -661,7 +530,7 @@
 
                     <div class="stat-icon">
 
-                        <img src="incoming-icon.png" 
+                        <img src="image/incoming-icon.png" 
                             alt="Incoming Calls" 
                             style="width: 20px; height: 20px;">
 
@@ -1394,37 +1263,6 @@
 
 
         /* ================================
-           LOGOUT
-        ================================= */
-
-        // document
-        //     .getElementById("logoutButton")
-        //     .addEventListener(
-        //         "click",
-        //         function (event) {
-
-        //             event.preventDefault();
-
-        //             localStorage.removeItem(
-        //                 "loggedIn"
-        //             );
-
-        //             localStorage.removeItem(
-        //                 "userEmail"
-        //             );
-
-        //             localStorage.removeItem(
-        //                 "project"
-        //             );
-
-        //             window.location.href =
-        //                 "login.html";
-
-        //         }
-        //     );
-
-
-        /* ================================
            START
         ================================= */
 
@@ -1513,7 +1351,6 @@
 }
     </script>
     <script src="js/sidebar.js"></script>
-    <script src="components/sidebar.html"></script>
     
 
 

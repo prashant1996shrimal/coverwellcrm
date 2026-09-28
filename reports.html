@@ -7,6 +7,9 @@
 
     <title>Coverwell CRM - Reports</title>
 
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <style>
         * {
             margin: 0;
@@ -14,6 +17,13 @@
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
+
+        /* MAIN */
+
+        .main {
+            margin-left: 240px;
+            min-height: 100vh;
+        } 
 
         body {
             background: #f4f7fb;
@@ -208,6 +218,9 @@
 
 
 <body>
+<main class="main">
+
+    <div id="sidebar-container"></div>
 
     <div class="container">
 
@@ -225,11 +238,6 @@
 
             </div>
 
-            <a href="dashboard.html" class="back-button">
-
-                ← Dashboard
-
-            </a>
 
         </div>
 
@@ -391,6 +399,7 @@
         </div>
 
     </div>
+</main>
 
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
@@ -403,6 +412,8 @@
 
 
     <script>
+
+        
 
         const API_URL =
             "http://localhost:8080";
@@ -917,6 +928,7 @@
         // loadEmployeeReport();
 
     </script>
+    <script src="js/sidebar.js"></script>
 
 </body>
 
